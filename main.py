@@ -308,4 +308,41 @@ class BST:
         self.left = None
         self.right = None
 
+#This took me quite a while but it wasn't supposed to. I should have taken short breaks and got back to it again but i wasted too much time.
+#I should have probably played chess or do a puzzle, then read something. Then get right back to it.
+# this code is for the IS sub sequence, this code is both memory and time efficient. It might be the most efficient thing, I have done so far.
+def isSubsequence(self, s: str, t: str) -> bool:
+    array = []
+    if s in t:
+        print(s, t)
+        return True
+    i = 0
+    for letter in s:
+        dif = t.count(letter) - s.count(letter)
+        if dif > 0:
+            t = t.replace(letter, '', dif)
+            print("DEBUGGGGGER!!!", dif)
+        print(dif, letter, t.count(letter))
+        if letter in t:
+            ind = t.index(letter)
+            t = t.replace(letter, '', 1)
+
+            array.append(ind)
+            print(array)
+        else:
+            print(False, 3333333333333)
+            return False
+
+    if len(s) != len(array):
+        return (False, 11111111111)
+    print(sorted(array))
+    if array == sorted(array):
+        print(True)
+
+        return True
+    else:
+        print(False, 222222222222)
+        print(array)
+        return False
+
 
