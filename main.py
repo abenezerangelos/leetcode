@@ -311,7 +311,7 @@ class BST:
 #This took me quite a while but it wasn't supposed to. I should have taken short breaks and got back to it again but i wasted too much time.
 #I should have probably played chess or do a puzzle, then read something. Then get right back to it.
 # this code is for the IS sub sequence, this code is both memory and time efficient. It might be the most efficient thing, I have done so far.
-def isSubsequence(self, s: str, t: str) -> bool:
+def isSubsequence( s: str, t: str) -> bool:
     array = []
     if s in t:
         print(s, t)
@@ -345,4 +345,88 @@ def isSubsequence(self, s: str, t: str) -> bool:
         print(array)
         return False
 
+#a little LinkedList class to get the Linked List started
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+#a partially working version of the first LinkedList merging problem in Python.
+def mergeTwoLists( list1:[ListNode], list2:[ListNode]) ->[ListNode]:
+    lister = ListNode()
+    if list1 is not None and list2 is not None:
+        if list1.val <= list2.val:
+            array = ListNode(list1.val, lister)
+        else:
+            array = ListNode(list2.val, lister)
+    else:
+        array = ListNode()
+    store = []
+    while list1 != None or list2 != None:
+        if list1 is not None and list2 is not None:
+            print(list1.val)
+            print('\n', lister.val, '\n')
 
+            if list1.val >= list2.val:
+                lister.val = list2.val
+                lister.next = ListNode(list1.val)
+
+            else:
+                lister.val = list1.val
+                lister.next = ListNode(list2.val)
+            print(lister.val, lister.next.val)
+            list1 = list1.next
+            list2 = list2.next
+
+        elif list1 is not None:
+            lister = list1
+            list1 = list1.next
+        elif list2 is not None:
+            lister = list2
+            list2 = list2.next
+        lister = lister.next
+        # incorrect
+        # if list1!=None:
+        #     list1=list1.next
+        # if list2!=None:
+        #     list2=list2.next
+    saver = array
+    while array is not None:
+        store += [array.val]
+        array = array.next
+    array = saver
+    print(store)
+    return array
+#THE ABOVE CODE IS NOT WORKING PARTIALLY BECAUSE OF A FLAW IN LOGIC INSTEAD OF COMPARING EACH AT THEIR OWN VALUES ONE
+#SHOULD DO AN OVERALL COMPARISON THROUGH OUT THE WHOLE LINKEDLIST AND THIS CODE DOES EXACTLY THAT
+#WHAT A BEAUTIFUL PIECE OF CODE
+#Ingenious idea if you ask me the time complexity is 75% efficient that is very very efficient, space was ok.
+def mergeTwoLists(list1: [ListNode], list2: [ListNode]) -> [ListNode]:
+        array = []
+        while list1 is not None or list2 is not None:
+            if list1 is not None and list2 is not None:
+                array.append(list1.val)
+                array.append(list2.val)
+                list1 = list1.next
+                list2 = list2.next
+            elif list1 is not None:
+                array.append(list1.val)
+                list1 = list1.next
+            elif list2 is not None:
+                array.append(list2.val)
+                list2 = list2.next
+        print(array)
+        array.sort()
+        print(array)
+        if len(array) > 0:
+            y = ListNode(array[0])
+            store = y
+            for i in array[1:]:
+                y.next = ListNode(i)
+                y = y.next
+                print(y.val)
+            print(store)
+            return store
+        else:
+            return None
+lister=mergeTwoLists(list1=ListNode(1,ListNode(3,ListNode(4))),list2=ListNode(1,ListNode(5,ListNode(8))))
+print(lister.val, lister.next.val,lister.next.next.val,lister.next.next.next.val)
