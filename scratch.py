@@ -22,8 +22,7 @@ array.sort()
 print(array)
 
 
-y=[]
-print(y[0])
+
 
 
 
@@ -37,20 +36,13 @@ print(y[0])
 
 
 #converting an array to a ListNode
-# store=ListNode()
-# i=0
-# j=1
-# lister=ListNode()
-# store.val=array[i]
-# store.next=ListNode(array[j],lister)
-# i+=1
-# j+=1
-# while j<len(array):
-#     lister.val = array[i]
-#     lister.next = ListNode(array[j])
-#     lister = lister.next
-#     i+=1
-#     j+=1
-#     print(j,len(array))
-# print(store.val, store.next.val,store.next.next.val,store.next.next.next.val,"!!!!!!!")
+store=y = ListNode(array[0])
+
+for i in array[1:]:
+    y.next = ListNode(i)
+    y = y.next
+    print(y.val)
+print(store)
+
+
 #recursively tending to this problem
