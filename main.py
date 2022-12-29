@@ -2,7 +2,7 @@
 nums = [1,2,3,4]
 #Output: [1,3,6,10]
 
-def runningSum(self, nums) :
+def runningSum(nums) :
     array = [0]
     for i in nums:
         array.append(i + array[-1])
@@ -430,3 +430,44 @@ def mergeTwoLists(list1: [ListNode], list2: [ListNode]) -> [ListNode]:
             return None
 lister=mergeTwoLists(list1=ListNode(1,ListNode(3,ListNode(4))),list2=ListNode(1,ListNode(5,ListNode(8))))
 print(lister.val, lister.next.val,lister.next.next.val,lister.next.next.next.val)
+
+#this is a VERY EFFICIENT code to add two linked list and then return a linked list
+class Solution:
+    def addTwoNumbers(self, l1: [ListNode], l2: [ListNode]) -> [ListNode]:
+        arr1 = []
+        while l1 is not None:
+            arr1.append(l1.val)
+            l1 = l1.next
+
+        arr2 = []
+        while l2 is not None:
+            arr2.append(l2.val)
+            l2 = l2.next
+        arr1.reverse()
+        arr2.reverse()
+        print(arr1)
+        str1 = int(''.join(str(i) for i in arr1))
+        str2 = int(''.join(str(i) for i in arr2))
+        print(str1, str2)
+        result = str1 + str2
+        array = [int(i) for i in str(result)]
+        array.reverse()
+        print(array)
+        store = y = ListNode(array[0])
+        for i in array[1:]:
+            y.next = ListNode(i)
+            y = y.next
+        return store
+# Not a very efficient but very intuitive code for finding the indexes of two integers in an array that add up to a target
+class Solution:
+    def twoSum(self, nums: [int], target: int) -> [int]:
+        i=len(nums)
+        for n in nums:
+            if target-n in nums:
+                if target-n != n:
+                    return [nums.index(n),nums.index(target-n)]
+                elif target-n==n and nums.count(n)>1:
+                    print(nums.index(target-n,nums.index(target-n)+1),"DEBUG")
+                    print(nums.index(n))
+                    print(nums.index(target-n))
+                    return [nums.index(n),nums.index(target-n,nums.index(target-n)+1)]

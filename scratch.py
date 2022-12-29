@@ -46,3 +46,17 @@ print(store)
 
 
 #recursively tending to this problem
+#reserved for a future date
+
+
+
+#how to look for the median in an array:
+
+a=[1,2,2,2,5,6,7,8,9]
+if len(a)%2==0:
+    print(a[int(len(a)/2)])
+else:
+    print((a[int((len(a)/2))]))
+a.reverse()
+print(a)
+print()
