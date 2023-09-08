@@ -471,3 +471,124 @@ class Solution:
                     print(nums.index(n))
                     print(nums.index(target-n))
                     return [nums.index(n),nums.index(target-n,nums.index(target-n)+1)]
+# Not a very efficient and not a very intuitive piece of code but it was recursive and it was very thorough
+#The time complexity is disgusting, as well as the space complexity. This is a sad piece
+# Maximum profit problem leetcode
+class Solution:
+    def maxProfit(self, prices:[int]) -> int:
+        dirt = Solution()
+        minindex = prices.index(min(prices))
+        maxindex = prices.index(max(prices))
+        if minindex <= maxindex:
+            print("EASY")
+            return max(prices) - min(prices)
+        else:
+            big = max(prices[:maxindex + 1])
+            small = min(prices[:maxindex + 1])
+            if prices.index(big) > prices.index(small):
+                first_dif = big - small
+
+            else:
+                first_dif = dirt.maxProfit(prices[:maxindex + 1])
+            print(maxindex, minindex)
+            big = max(prices[maxindex:minindex])
+            small = min(prices[maxindex:minindex])
+            if prices.index(big) > prices.index(small):
+                second_dif = big - small
+            else:
+                second_dif = dirt.maxProfit(prices[maxindex:minindex])
+            big = max(prices[minindex:])
+            small = min(prices[minindex:])
+            if prices.index(big) > prices.index(small):
+                third_dif = big - small
+            else:
+                third_dif = dirt.maxProfit(prices[minindex:])
+            if first_dif >= second_dif and first_dif >= third_dif:
+                return first_dif
+            elif second_dif >= first_dif and second_dif >= third_dif:
+                return second_dif
+            elif third_dif >= first_dif and third_dif >= second_dif:
+                return third_dif
+            else:
+                return 0
+#There is a much better version of this solution with better space and time complexity: O(n) and O(1)
+# I will finish writing it right now
+class Solution:
+    def maxProfit(self, prices:[int]) -> int:
+        minprice = float('inf')
+        maximum = 0
+
+        for i in prices:
+            if i < minprice:
+                minprice = i
+            elif maximum < i - minprice:
+                maximum = i - minprice
+        return maximum
+# the median of the list
+class Solution:
+    def middleNode(self, head: [ListNode]) -> [ListNode]:
+        if head is None:
+            return None
+        store=[]
+        while head is not None:
+            store.append(head)
+            head=head.next
+        return store[int(len(store)/2)]
+# UTF-8 encoding it wasn't supposed to take a long amount of time and i could have used the format() method but I did not
+# and now I ruined it, kinda sad if you ask me
+class Solution:
+    def validUtf8(self, data: [int]) -> bool:
+
+        binlist = [bin(i).removeprefix("0b") if len(bin(i)) == 10 else "".join(
+            list("0" for i in range(10 - len(bin(i))))) + bin(i).removeprefix("0b") for i in data]
+
+        status = 0
+        go1 = go2 = go3 = go4 = True
+        for i, e in enumerate(binlist):
+
+            if i == status:
+                if len(binlist) >= 4:
+                    if e[:5] == "11110" and binlist[i + 1][:2] == '10' and binlist[i + 2][:2] == '10' and binlist[
+                                                                                                              i + 3][
+                                                                                                          :2] == "10":
+
+                        status = i + 4
+                        go1 = True
+                    else:
+                        go1 = False
+                if len(binlist) >= 3:
+                    if e[:4] == "1110" and binlist[i + 1][:2] == '10' and binlist[i + 2][:2] == '10':
+
+                        status = i + 3
+                        go2 = True
+                    else:
+                        go2 = False
+                if len(binlist) >= 2:
+                    if e[:3] == "110" and binlist[i + 1][:2] == '10':
+
+                        status = i + 2
+                        go3 = True
+                    else:
+                        go3 = False
+                if len(binlist) >= 1:
+                    if e[:1] == "0":
+
+                        status += 1
+                        go4 = True
+                    else:
+                        go4 = False
+
+        if len(binlist) >= 4 and not go1 and not go2 and not go3 and not go4:
+            return False
+        elif len(binlist) == 3 and not go4 and not go3 and not go2:
+            return False
+        elif len(binlist) == 2 and not go4 and not go3:
+            return False
+        elif len(binlist) == 1 and not go4:
+            return False
+        else:
+
+            return True
+
+#TODO: Make conversion from binary tree to linkedlist and vice versa
+#TODO 2: Try and convert different data structures into simpler either using dictionaries or arrays.
